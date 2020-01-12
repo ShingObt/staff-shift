@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <title>{{title}}</title>
+</head>
+<body class="container-fluid">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">まぐろマーケット</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbar-content"
+              aria-controls="navbar-content"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-content">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">トップ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/employee">従業員</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/show_monthly_shift">シフト</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+
+  <!-- ここにコンテンツが入る -->
+  {% block content %}{% endblock %}
+
+  <script src="/static/js/jquery-3.4.1.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

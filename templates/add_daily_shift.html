@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="form-inline" method="post" action="/add_daily_shift_commit">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center">
+          {{target_date.strftime('%Y')}}年
+          {{target_date.strftime('%m')}}月
+          {{target_date.strftime('%d')}}日のシフトに追加
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="col" style="width:50%"><h4>時間</h4></th>
+          <th scope="col" style="width:50%"><h4>従業員</h4></th>
+        </tr>
+        <tr>
+          <td>
+            <select class="form-control" name="start_time_hour">
+              {% for sh in range(0,24) %}
+                <option value="{{sh}}">{{'%02d'|format(sh)}}</option>
+              {% endfor %}
+            </select>
+            :
+            <select class="form-control" name="start_time_minute">
+              {% for sm in range(0,60) %}
+                <option value="{{sm}}">{{'%02d'|format(sm)}}</option>
+              {% endfor %}
+            </select>
+            &nbsp;-&nbsp;
+            <select class="form-control" name="end_time_hour">
+              {% for eh in range(0,24) %}
+                <option value="{{eh}}">{{'%02d'|format(eh)}}</option>
+              {% endfor %}
+            </select>
+            :
+            <select class="form-control" name="end_time_minute">
+              {% for em in range(0,60) %}
+                <option value="{{em}}">{{'%02d'|format(em)}}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select class="form-control" name="employee">
+              {% for employee in employees %}
+                <option value="{{employee.employee_id}}">{{employee.nickname}}</option>
+              {% endfor %}
+            </select>
+          </td>
+        <tr>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col text-right">
+        <h4><button type="submit" class="btn btn-primary">保存</button></h4>
+        <input type="hidden" name="target_date" value="{{target_date.strftime('%Y%m%d')}}">
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center">{{target_month.strftime('%Y')}}年{{target_month.strftime('%m')}}月のシフト</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3>
+          <a class="badge badge-primary" href="/show_monthly_shift/{{pre_year_month.strftime('%Y%m')}}">
+            {{pre_year_month.strftime('%Y')}}年{{pre_year_month.strftime('%m')}}月
+          </a>
+        </h3>
+      </div>
+      <div class="col text-right">
+        <h3>
+          <a class="badge badge-primary" href="/show_monthly_shift/{{next_year_month.strftime('%Y%m')}}">
+            {{next_year_month.strftime('%Y')}}年{{next_year_month.strftime('%m')}}月
+          </a>
+        </h3>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="col"><h3>日</h3></th>
+          <th scope="col"><h3>月</h3></th>
+          <th scope="col"><h3>火</h3></th>
+          <th scope="col"><h3>水</h3></th>
+          <th scope="col"><h3>木</h3></th>
+          <th scope="col"><h3>金</h3></th>
+          <th scope="col"><h3>土</h3></th>
+        </tr>
+        {% for week in monthly_cal %}
+        <tr>
+          {% for day in week %}
+          <td>
+            <h3><a href="/show_daily_shift/{{day.strftime('%Y%m%d')}}">{{day.strftime('%d')}}</a></h3>
+            {% for shift in monthly_shift %}
+              {% if shift.day == day %}
+                <h4><span class="badge badge-light">{{shift.nickname}}</h4>
+              {% endif %}
+            {% endfor %}
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+{% endblock %}

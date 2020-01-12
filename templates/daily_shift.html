@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center">
+          {{target_date.strftime('%Y')}}年
+          {{target_date.strftime('%m')}}月
+          {{target_date.strftime('%d')}}日のシフト
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <h3>
+          <a class="badge badge-primary" href="/show_monthly_shift/{{target_date.strftime('%Y%m')}}">
+            {{target_date.strftime('%Y')}}年{{target_date.strftime('%m')}}月
+          </a>
+        </h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3>
+          <a class="badge badge-primary" href="/show_daily_shift/{{pre_date.strftime('%Y%m%d')}}">
+            ＜＜{{pre_date.strftime('%Y')}}年{{pre_date.strftime('%m')}}月{{pre_date.strftime('%d')}}日
+          </a>
+        </h3>
+      </div>
+      <div class="col text-right">
+        <h3>
+          <a class="badge badge-primary" href="/show_daily_shift/{{next_date.strftime('%Y%m%d')}}">
+            {{next_date.strftime('%Y')}}年{{next_date.strftime('%m')}}月{{next_date.strftime('%d')}}日＞＞
+          </a>
+        </h3>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="col" style="width:40%"><h4>時間</h4></th>
+          <th scope="col" style="width:40%"><h4>従業員</h4></th>
+          <th scope="col" style="width:20%"><h4>操作</h4></th>
+        </tr>
+    {% if daily_shift|length > 0 %}
+      {% for shift in daily_shift %}
+        <tr>
+          <td>
+            {{ shift.start_time.strftime('%H:%M') }} - {{ shift.end_time.strftime('%H:%M') }}
+          </td>
+          <td>{{shift.nickname}}</td>
+          <td>
+            <form method="post" action="/del_daily_shift">
+              <button type="submit" class="btn btn-danger" id="delBtn">削除</button>
+              <input type="hidden" name="del_id" value="{{shift.employee_id}}">
+              <input type="hidden" name="target_date" value="{{target_date.strftime('%Y%m%d')}}">
+            </form>
+          </td>
+        <tr>
+      {% endfor %}
+    {% else %}
+        <tr>
+          <td colspan="3"></td>
+        <tr>
+    {% endif %}
+      </table>
+    </div>
+    <div class="row">
+      <div class="col text-right">
+        <h4><a href="/add_daily_shift/{{target_date.strftime('%Y%m%d')}}" class="btn btn-primary">追加</a></h4>
+      </div>
+    </div>
+  </div>
+{% endblock %}
