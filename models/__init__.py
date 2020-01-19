@@ -1,5 +1,5 @@
-from .models import Employee, Shift
+from .models import Staff, Shift
 
 __all__ = [
-    Employee, Shift,
+    Staff, Shift,
 ]

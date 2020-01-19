@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>{{title}}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="table table-bordered">
+          <tr>
+            <th scope="col" style="width:40%;">職員ID</th>
+            <th scope="col" style="width:40%;">ニックネーム</th>
+            <th scope="col" style="width:20%;">操作</th>
+          </tr>
+          {% for staff in staffs %}
+            <tr>
+              <td>{{staff.staff_id}}</td>
+              <td>{{staff.nickname}}</td>
+              <td>
+                <form method="post" action="/del_staff">
+                  <button type="submit" class="btn btn-danger">削除</button>
+                  <input type="hidden" name="staff_id" value="{{staff.staff_id}}">
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-right">
+        <h4><a href="/add_staff" class="btn btn-primary">追加</a></h4>
+      </div>
+    </div>
+  </div>
+{% endblock %}

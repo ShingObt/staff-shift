@@ -17,34 +17,34 @@ app = init_db(app)
 # URLによって振り分けられる関数群
 @app.route('/')
 def top():
-    return render_template('index.html', title='従業員シフト入力システム')
+    return render_template('index.html', title='職員シフト入力システム')
 
-@app.route('/employee')
-def employee_list():
-    employees = models.Employee.get_employees()
-    return render_template('employee.html', title='従業員一覧', employees=employees)
+@app.route('/staff')
+def staff_list():
+    staffs = models.Staff.get_staffs()
+    return render_template('staff.html', title='職員一覧', staffs=staffs)
 
-@app.route('/add_employee')
-def add_employee():
-    return render_template('add_employee.html', title='従業員追加')
+@app.route('/add_staff')
+def add_staff():
+    return render_template('add_staff.html', title='職員追加')
 
-@app.route('/add_employee_commit', methods=['POST'])
-def add_employee_commit():
+@app.route('/add_staff_commit', methods=['POST'])
+def add_staff_commit():
     nickname = request.form['nickname']
-    models.Employee.add_employee(nickname)
-    return redirect("/employee")
+    models.Staff.add_staff(nickname)
+    return redirect("/staff")
 
-@app.route('/del_employee', methods=['POST'])
-def del_employee():
-    employee_id = request.form['employee_id']
-    employee = models.Employee.get_one_employee(employee_id)
-    return render_template("del_employee.html", title="従業員削除確認", employee=employee)
+@app.route('/del_staff', methods=['POST'])
+def del_staff():
+    staff_id = request.form['staff_id']
+    staff = models.Staff.get_one_staff(staff_id)
+    return render_template("del_staff.html", title="職員削除確認", staff=staff)
 
-@app.route('/del_employee_commit', methods=['POST'])
-def del_employee_commit():
-    employee_id = request.form['employee_id']
-    models.Employee.del_employee(employee_id)
-    return redirect("/employee")
+@app.route('/del_staff_commit', methods=['POST'])
+def del_staff_commit():
+    staff_id = request.form['staff_id']
+    models.Staff.del_staff(staff_id)
+    return redirect("/staff")
 
 @app.route('/show_monthly_shift/')
 @app.route('/show_monthly_shift/<string:year_month>')
@@ -91,9 +91,9 @@ def add_daily_shift(date=None):
 
     target_date = datetime.strptime(date, DATE_FORMAT)
 
-    employees = models.Employee.get_employees()
+    staffs = models.Staff.get_staffs()
     return render_template('add_daily_shift.html', title='シフト追加', \
-                           target_date=target_date, employees=employees)
+                           target_date=target_date, staffs=staffs)
 
 @app.route('/add_daily_shift_commit', methods=['POST'])
 def add_daily_shift_commit():
@@ -102,13 +102,13 @@ def add_daily_shift_commit():
     start_time_minute = request.form['start_time_minute']
     end_time_hour = request.form['end_time_hour']
     end_time_minute = request.form['end_time_minute']
-    employee_id = request.form['employee']
+    staff_id = request.form['staff']
 
     target_date = datetime.strptime(date, DATE_FORMAT)
     start_time = time(int(start_time_hour), int(start_time_minute), 0)
     end_time = time(int(end_time_hour), int(end_time_minute), 0)
 
-    models.Shift.add_shift(target_date, employee_id, start_time, end_time)
+    models.Shift.add_shift(target_date, staff_id, start_time, end_time)
 
     redirect_uri = url_for('show_daily_shift', date=target_date.strftime('%Y%m%d'))
     return redirect(redirect_uri)
@@ -116,11 +116,11 @@ def add_daily_shift_commit():
 @app.route('/del_daily_shift', methods=['POST'])
 def del_daily_shift():
     date = request.form['target_date']
-    employee_id = request.form['del_id']
+    staff_id = request.form['del_id']
 
     target_date = datetime.strptime(date, DATE_FORMAT)
 
-    models.Shift.del_shift(target_date, employee_id)
+    models.Shift.del_shift(target_date, staff_id)
 
     redirect_uri = url_for('show_daily_shift', date=date)
     return redirect(redirect_uri)

@@ -1,10 +1,10 @@
 class SysConfig:
 
-    DBUSER = 'maguro'
+    DBUSER = 'manager'
     PASSWD = 'password'
     DBHOST = 'localhost'
     DBPORT = '5432'
-    DATABASE = 'maguro_market'
+    DATABASE = 'staff_shift'
 
     SQLALCHEMY_DATABASE_URI = "postgresql://" \
                               + DBUSER + ":" \

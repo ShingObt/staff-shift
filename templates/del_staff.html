@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<form id="staff_form" method="post" action="/del_staff_commit">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>{{title}}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3>職員番号：{{staff.staff_id}}</h3>
+      </div>
+      <div class="col">
+        <h3>ニックネーム：{{staff.nickname}}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4>
+          上記職員を削除します。よろしいですか？
+          <span class="text-danger">
+            過去のシフト表からも上記職員は全て削除されます。
+          </span>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-right">
+        <h4><button type="submit" class="btn btn-primary">削除</button></h4>
+        <input type="hidden" name="staff_id" value="{{staff.staff_id}}">
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

@@ -39,7 +39,7 @@
       <table class="table table-bordered">
         <tr>
           <th scope="col" style="width:40%"><h4>時間</h4></th>
-          <th scope="col" style="width:40%"><h4>従業員</h4></th>
+          <th scope="col" style="width:40%"><h4>職員</h4></th>
           <th scope="col" style="width:20%"><h4>操作</h4></th>
         </tr>
     {% if daily_shift|length > 0 %}
@@ -52,7 +52,7 @@
           <td>
             <form method="post" action="/del_daily_shift">
               <button type="submit" class="btn btn-danger" id="delBtn">削除</button>
-              <input type="hidden" name="del_id" value="{{shift.employee_id}}">
+              <input type="hidden" name="del_id" value="{{shift.staff_id}}">
               <input type="hidden" name="target_date" value="{{target_date.strftime('%Y%m%d')}}">
             </form>
           </td>

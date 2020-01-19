@@ -15,7 +15,7 @@
       <table class="table table-bordered">
         <tr>
           <th scope="col" style="width:50%"><h4>時間</h4></th>
-          <th scope="col" style="width:50%"><h4>従業員</h4></th>
+          <th scope="col" style="width:50%"><h4>職員</h4></th>
         </tr>
         <tr>
           <td>
@@ -44,9 +44,9 @@
             </select>
           </td>
           <td>
-            <select class="form-control" name="employee">
-              {% for employee in employees %}
-                <option value="{{employee.employee_id}}">{{employee.nickname}}</option>
+            <select class="form-control" name="staff">
+              {% for staff in staffs %}
+                <option value="{{staff.staff_id}}">{{staff.nickname}}</option>
               {% endfor %}
             </select>
           </td>
